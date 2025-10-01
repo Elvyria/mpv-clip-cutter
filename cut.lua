@@ -51,18 +51,21 @@ end
 
 
 local function exists(path)
+   local EACCES = 13
    local ok, _, code = os.rename(path, path)
-   if code == 13 then
+   if code == EACCES then
 	   return true
    end
    return ok
 end
 
-local function output(name, ext)
-	local name = name .. '.cut-'
-	local ext = '.' .. ext
+local function format_ouput(name, ext)
+	local MAX_CLIPS = 64
 
-	for i = 1, 64, 1 do
+	name = name .. '.cut-'
+	ext = '.' .. ext
+
+	for i = 1, MAX_CLIPS, 1 do
 		if not exists(name .. i ..  ext) then
 			return name .. i .. ext
 		end
@@ -77,7 +80,7 @@ local function cut()
 	local input = mp.get_property('path')
 	local name = mp.get_property('filename/no-ext')
 	local ext = input:match('^.*%.(.+)')
-	local output = output(name, ext)
+	local output = format_ouput(name, ext)
 
 	local cmd = { 'ffmpeg' }
 
