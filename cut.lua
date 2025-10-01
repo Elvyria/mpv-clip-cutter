@@ -51,12 +51,12 @@ end
 
 
 local function exists(path)
-   local EACCES = 13
-   local ok, _, code = os.rename(path, path)
-   if code == EACCES then
-	   return true
-   end
-   return ok
+	local EACCES = 13
+	local ok, _, code = os.rename(path, path)
+	if code == EACCES then
+		return true
+	end
+	return ok
 end
 
 local function format_ouput(name, ext)
@@ -66,7 +66,7 @@ local function format_ouput(name, ext)
 	ext = '.' .. ext
 
 	for i = 1, MAX_CLIPS, 1 do
-		if not exists(name .. i ..  ext) then
+		if not exists(name .. i .. ext) then
 			return name .. i .. ext
 		end
 	end
