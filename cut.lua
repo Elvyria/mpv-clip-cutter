@@ -79,17 +79,23 @@ local function cut()
 	local ext = input:match('^.*%.(.+)')
 	local output = output(name, ext)
 
-	local cmd = {
-		'ffmpeg',
-		'-i', input,
-		'-c', 'copy',
-		'-ss', markStart.time,
-	}
+	local cmd = { 'ffmpeg' }
+
+	if markStart.time then
+		table.insert(cmd, '-ss')
+		table.insert(cmd, markStart.time)
+	end
+
+	table.insert(cmd, '-i')
+	table.insert(cmd, input)
 
 	if markEnd.time ~= 0 then
 		table.insert(cmd, '-to')
 		table.insert(cmd, markEnd.time)
 	end
+
+	table.insert(cmd, '-c')
+	table.insert(cmd, 'copy')
 
 	table.insert(cmd, output)
 
