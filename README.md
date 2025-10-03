@@ -8,8 +8,14 @@ Because every other script that I found was overly complicated or just simply di
 ## Installation
 
 Drop the **[cut.lua](/cut.lua)** script from the repository into scripts directory that resides near `mpv.conf` :
+* ##### curl
 ```sh
-${XDG_CONFIG_HOME:-$HOME/.config}/mpv/scripts
+curl --output-dir "${XDG_CONFIG_HOME:-$HOME/.config}/mpv/scripts" -O 'https://raw.githubusercontent.com/Elvyria/mpv-clip-cutter/refs/heads/master/cut.lua'
+```
+
+* ##### wget
+```sh
+wget -P "${XDG_CONFIG_HOME:-$HOME/.config}/mpv/scripts" 'https://raw.githubusercontent.com/Elvyria/mpv-clip-cutter/refs/heads/master/cut.lua'
 ```
 
 ## Dependencies
